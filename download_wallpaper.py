@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
@@ -19,10 +20,11 @@ def dumpBingWallpaper():
     desc = str(jsonData['images'][0]['copyright']).split(',')[0]
     dt = jsonData['images'][0]['startdate']
     desc = desc.replace(" ", "")
-    output = '~/Pictures/Wallpapers/Display/{}.jpg'.format(desc + "_" + dt)
-    with open(output, 'wb') as f:
+    print(os.getcwd())
+    output = os.getcwd() + '/Display/{}.jpg'.format(desc + "_" + dt)
+    with open(os.path.abspath(output), 'wb') as f:
         f.write(img)
-    print('Downloaded', output)
+    print(f'Downloaded {desc} to {output}')
 
 if __name__ == "__main__":
     dumpBingWallpaper()

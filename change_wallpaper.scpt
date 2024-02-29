@@ -1,6 +1,6 @@
 on run argv
 	set wallpaperName to item 1 of argv
-	set wallpaperPath to POSIX path of "/Users/ubec/Pictures/Wallpapers/Display/" & (wallpaperName as string) & ".jpg"
+	set wallpaperPath to POSIX path of "/Users/ubec/Pictures/Wallpapers/Display/" & (wallpaperName as string)
 	log wallpaperPath
   tell application "System Events"
       set theDesktops to a reference to every desktop

@@ -21,7 +21,7 @@ def dumpBingWallpaper():
     dt = jsonData['images'][0]['startdate']
     desc = desc.replace(" ", "")
     print(os.getcwd())
-    output = os.getcwd() + '/Display/{}.jpg'.format(desc + "_" + dt)
+    output = os.getcwd() + '/Display/{}.jpg'.format(desc + "_" + dt).replace('/', '')
     with open(os.path.abspath(output), 'wb') as f:
         f.write(img)
     print(f'Downloaded {desc} to {output}')

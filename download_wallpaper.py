@@ -19,9 +19,9 @@ def dumpBingWallpaper():
     img = requests.get("https://s.cn.bing.net/" + uri, headers=headers).content
     desc = str(jsonData['images'][0]['copyright']).split(',')[0]
     dt = jsonData['images'][0]['startdate']
-    desc = desc.replace(" ", "")
+    desc = desc.replace(" ", "").replace('/', '')
     print(os.getcwd())
-    output = os.getcwd() + '/Display/{}.jpg'.format(desc + "_" + dt).replace('/', '')
+    output = os.getcwd() + '/Display/{}.jpg'.format(desc + "_" + dt)
     with open(os.path.abspath(output), 'wb') as f:
         f.write(img)
     print(f'Downloaded {desc} to {output}')

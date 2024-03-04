@@ -37,6 +37,13 @@ def dumpBingWallpaper():
         f.write(img)
     print(f'Downloaded {desc} to {output}')
 
+def dumpHistoryBingWallpaper():
+    img = requests.get("https://bing.img.run/rand_uhd.php", headers=headers).content
+    output = os.getcwd() + '/Display/{}.jpg'.format(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M"))
+    with open(os.path.abspath(output), 'wb') as f:
+        f.write(img)
+
 if __name__ == "__main__":
     removeOutdatedPics()
-    dumpBingWallpaper()
+    # dumpBingWallpaper()
+    dumpHistoryBingWallpaper()

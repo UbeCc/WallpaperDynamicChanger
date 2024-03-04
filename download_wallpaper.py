@@ -1,6 +1,18 @@
 import requests
 import json
 import os
+import datetime
+
+def removeOutdatedPics():
+    path = os.getcwd() + '/Display'
+    now = datetime.datetime.now()
+    for filename in os.listdir(path):    
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+            filepath = os.path.join(path, filename)
+            filemtime = datetime.datetime.fromtimestamp(os.path.getmtime(filepath))
+            if (now - filemtime).total_seconds() > 24 * 3600: # > 1 day
+                print(filename, "was downloaded more than 24 hours ago.")
+                os.remove(filepath)
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
@@ -20,11 +32,11 @@ def dumpBingWallpaper():
     desc = str(jsonData['images'][0]['copyright']).split(',')[0]
     dt = jsonData['images'][0]['startdate']
     desc = desc.replace(" ", "").replace('/', '')
-    print(os.getcwd())
     output = os.getcwd() + '/Display/{}.jpg'.format(desc + "_" + dt)
     with open(os.path.abspath(output), 'wb') as f:
         f.write(img)
     print(f'Downloaded {desc} to {output}')
 
 if __name__ == "__main__":
+    removeOutdatedPics()
     dumpBingWallpaper()
